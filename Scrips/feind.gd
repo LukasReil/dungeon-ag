@@ -1,22 +1,24 @@
+class_name Feind
 extends CharacterBody2D
 
 @onready var nav2d: NavigationAgent2D = $NavigationAgent2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 enum States {idle,moving,attacking}
-var ziel : Vector2 = Vector2(0.0,0.0)
+var ziel : Vector2 = Vector2.INF
 var Zielrichtung : Vector2
 var state = States.idle
 var bewegungrutsch: int = 500
 const SPEED : int = 9000
 var Leben : float = 100.0
 
+func init(spawn_position : Vector2) -> void:
+	global_position = spawn_position
 
-func zielsetzen(punkte: Array[Vector2],zerstoert = null):
+func zielsetzen(punkte: Array[Vector2], zerstoert : Vector2 = Vector2.INF):
 	
-	if zerstoert != null:
-		if zerstoert != ziel:
-			return
+	if ziel != Vector2.INF && ziel != zerstoert:
+		return
 	
 	var minddist : float = 1.79769e308
 	var minddist_vec : Vector2 = Vector2.ZERO

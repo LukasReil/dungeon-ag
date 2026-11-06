@@ -1,7 +1,7 @@
 class_name RoomScene
 extends Node2D
 
-@export var ROOM_LOADER : RoomLoader
+@onready var ROOM_LOADER : RoomLoader = $RoomLoader
 
 signal player_entered_enemy_spawner(index: int)
 
