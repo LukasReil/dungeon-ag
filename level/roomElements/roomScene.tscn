@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cy6qumqsdgqft" path="res://level/roomElements/enemy/enemy_spawner_texture_placeholder.png" id="3_c55gg"]
 [ext_resource type="Script" uid="uid://82wgl0kxonso" path="res://level/roomElements/wave_manager.gd" id="6_ngm4v"]
 [ext_resource type="PackedScene" uid="uid://dc1xy2sdl3e1m" path="res://Szenen/feind.tscn" id="7_0pw13"]
+[ext_resource type="PackedScene" uid="uid://r32w6kpyiojw" path="res://Szenen/tower.tscn" id="8_6iyi3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wrlb0"]
 
@@ -66,7 +67,7 @@ script = ExtResource("6_ngm4v")
 POSSIBLE_ENEMIES = Array[PackedScene]([ExtResource("7_0pw13")])
 
 [node name="WaveStartTimer" type="Timer" parent="WaveManager" unique_id=395009508]
-wait_time = 5.0
+wait_time = 0.004
 one_shot = true
 autostart = true
 
@@ -79,5 +80,8 @@ position = Vector2(624, 400)
 radius = 37.79
 affect_navigation_mesh = true
 carve_navigation_mesh = true
+
+[node name="Tower" parent="." unique_id=1281357301 instance=ExtResource("8_6iyi3")]
+position = Vector2(100, 116)
 
 [connection signal="timeout" from="WaveManager/WaveStartTimer" to="WaveManager" method="_on_wave_start_timer_timeout"]

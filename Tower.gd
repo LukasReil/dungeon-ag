@@ -28,8 +28,8 @@ func dauer() -> void:
 	c2d.disabled = true
 
 
-func _feindaua(body: Node2D) -> void:
-	var prj = body as BaseProjektil
+func _on_hitbox_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	var prj = area as Node2D as BaseProjektil
 	if prj != null:
 		Leben -= prj.damage
 	pass
