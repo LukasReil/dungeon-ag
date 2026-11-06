@@ -23,7 +23,7 @@ func _load_new_room() -> void:
 		
 	current_room = ROOM_SCENE_TEMPLATE.instantiate()
 	current_room.player_entered_enemy_spawner.connect(_on_player_entered_enemy_spawner)
-	add_child(current_room)
+	call_deferred("add_child", current_room)
 	
 func _on_player_entered_enemy_spawner(index: int) -> void:
 	print("Player entered {0}".format([index]))
