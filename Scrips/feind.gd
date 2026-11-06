@@ -12,7 +12,11 @@ const SPEED : int = 9000
 var Leben : float = 100.0
 
 
-func zielsetzen(punkte: Array[Vector2]):
+func zielsetzen(punkte: Array[Vector2],zerstoert = null):
+	
+	if zerstoert != null:
+		if zerstoert != ziel:
+			return
 	
 	var minddist : float = 1.79769e308
 	var minddist_vec : Vector2 = Vector2.ZERO
