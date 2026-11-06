@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DungeonAG"
-run/main_scene="uid://duo43a88ake2j"
+run/main_scene="uid://dge8e333uf3nu"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
