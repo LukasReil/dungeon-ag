@@ -18,6 +18,9 @@ extends Node
 
 signal player_entered_enemy_spawner(index: int)
 
+var loaded_enemy_spawners : Array[EnemySpawner] = []
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#region Export Asserts
@@ -34,6 +37,7 @@ func _ready() -> void:
 		enemy_spawner_instance.init(spawner_position, i)
 		add_child(enemy_spawner_instance)
 		enemy_spawner_instance.player_entered_enemy_spawner.connect(func lambda(index): player_entered_enemy_spawner.emit(index))
+		loaded_enemy_spawners.append(enemy_spawner_instance as EnemySpawner)
 
 
 	spawn_player()
