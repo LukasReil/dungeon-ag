@@ -5,8 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://m21mtitgnbru" path="res://Szenen/Spieler.tscn" id="3_887xr"]
 [ext_resource type="Texture2D" uid="uid://cy6qumqsdgqft" path="res://level/roomElements/enemy/enemy_spawner_texture_placeholder.png" id="3_c55gg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aske4"]
-size = Vector2(196.0401, 193.84998)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wrlb0"]
 
 [node name="Node2D" type="Node2D" unique_id=1880088253]
 
@@ -37,3 +36,25 @@ position = Vector2(50, 360)
 
 [node name="Sprite2D" type="Sprite2D" parent="Entry" unique_id=955214143]
 texture = ExtResource("3_c55gg")
+
+[node name="MapBoundary" type="StaticBody2D" parent="." unique_id=1845140222]
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="MapBoundary" unique_id=1501296278]
+position = Vector2(640, 0)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_wrlb0")
+
+[node name="Bottom" type="CollisionShape2D" parent="MapBoundary" unique_id=1669081960]
+position = Vector2(640, 720)
+shape = SubResource("WorldBoundaryShape2D_wrlb0")
+
+[node name="Left" type="CollisionShape2D" parent="MapBoundary" unique_id=1498152549]
+position = Vector2(0, 360)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_wrlb0")
+
+[node name="Right" type="CollisionShape2D" parent="MapBoundary" unique_id=1373022933]
+position = Vector2(1280, 360)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_wrlb0")
