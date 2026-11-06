@@ -2,18 +2,26 @@
 
 [ext_resource type="Script" uid="uid://byp782sqanrdh" path="res://room_loader.gd" id="1_swdke"]
 [ext_resource type="PackedScene" uid="uid://c260l7tlu410v" path="res://level/roomElements/enemy/enemy_spawner.tscn" id="2_mhf5n"]
+[ext_resource type="Texture2D" uid="uid://cy6qumqsdgqft" path="res://level/roomElements/enemy/enemy_spawner_texture_placeholder.png" id="3_c55gg"]
 
 [node name="Node2D" type="Node2D" unique_id=1880088253]
 
 [node name="EnemySpawnerTopBound" type="Node2D" parent="." unique_id=705635738]
-position = Vector2(1063, 81)
+position = Vector2(1230, 150)
 
-[node name="RoomLoader" type="Node" parent="." unique_id=335096796 node_paths=PackedStringArray("ENEMY_SPAWNER_TOP_BOUND", "ENEMY_SPAWNER_BOTTOM_BOUND")]
+[node name="RoomLoader" type="Node" parent="." unique_id=335096796 node_paths=PackedStringArray("ENEMY_SPAWNER_TOP_BOUND", "ENEMY_SPAWNER_BOTTOM_BOUND", "ENTRY")]
 script = ExtResource("1_swdke")
 ENEMY_SPAWNER_TEMPLATE = ExtResource("2_mhf5n")
 ENEMY_SPAWNERS = Array[int]([0, 0, 0])
 ENEMY_SPAWNER_TOP_BOUND = NodePath("../EnemySpawnerTopBound")
 ENEMY_SPAWNER_BOTTOM_BOUND = NodePath("../EnemySpawnerBottomBound")
+ENTRY = NodePath("../Entry")
 
 [node name="EnemySpawnerBottomBound" type="Node2D" parent="." unique_id=659823040]
-position = Vector2(1100, 582)
+position = Vector2(1230, 570)
+
+[node name="Entry" type="Node2D" parent="." unique_id=1638037068]
+position = Vector2(50, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="Entry" unique_id=955214143]
+texture = ExtResource("3_c55gg")

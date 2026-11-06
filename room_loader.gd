@@ -1,5 +1,7 @@
 extends Node
 
+
+@export_category("Enemy Spawn Config")
 @export var ENEMY_SPAWNER_TEMPLATE: PackedScene
 
 @export var ENEMY_SPAWNERS: Array[int]
@@ -7,6 +9,10 @@ extends Node
 
 @export var ENEMY_SPAWNER_TOP_BOUND: Node2D
 @export var ENEMY_SPAWNER_BOTTOM_BOUND: Node2D
+
+@export_category("Player")
+@export var ENTRY: Node2D
+@export var PLAYER_TEMPLATE: PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,6 +30,8 @@ func _ready() -> void:
 		add_child(enemy_spawner_instance)
 
 
+	spawn_player()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -36,3 +44,12 @@ func _calculate_spawner_position(index: int) -> Vector2:
 	var delta = ENEMY_SPAWNER_BOTTOM_BOUND.position - ENEMY_SPAWNER_TOP_BOUND.position
 	var step = delta / (ENEMY_SPAWNER_COUNT - 1)
 	return ENEMY_SPAWNER_TOP_BOUND.position + index * step
+	
+func spawn_player() -> void:
+	if PLAYER_TEMPLATE == null:
+		push_warning("Not Player Template supplied!")
+		return
+	
+	var player_instance = PLAYER_TEMPLATE.instantiate()
+	player_instance.init(ENTRY.global_position)
+	add_child(player_instance)
