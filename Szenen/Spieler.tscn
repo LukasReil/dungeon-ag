@@ -8,6 +8,8 @@ radius = 63.0
 height = 126.0
 
 [node name="Spieler" type="CharacterBody2D" unique_id=1419825978]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_dyumb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=532589032]

@@ -1,3 +1,5 @@
+class_name RoomLoader
+
 extends Node
 
 
@@ -14,6 +16,8 @@ extends Node
 @export var ENTRY: Node2D
 @export var PLAYER_TEMPLATE: PackedScene
 
+signal player_entered_enemy_spawner(index: int)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#region Export Asserts
@@ -26,8 +30,10 @@ func _ready() -> void:
 		var enemy_spawner_config = ENEMY_SPAWNERS[i]
 		var enemy_spawner_instance = ENEMY_SPAWNER_TEMPLATE.instantiate()
 		var spawner_position = _calculate_spawner_position(i)
-		enemy_spawner_instance.init(spawner_position)
+		enemy_spawner_instance.name = "EnemySpawner_{0}".format([i])
+		enemy_spawner_instance.init(spawner_position, i)
 		add_child(enemy_spawner_instance)
+		enemy_spawner_instance.player_entered_enemy_spawner.connect(func lambda(index): player_entered_enemy_spawner.emit(index))
 
 
 	spawn_player()
@@ -35,7 +41,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
 
 func _calculate_spawner_position(index: int) -> Vector2:
 	if ENEMY_SPAWNER_COUNT <= 1:
@@ -53,3 +58,4 @@ func spawn_player() -> void:
 	var player_instance = PLAYER_TEMPLATE.instantiate()
 	player_instance.init(ENTRY.global_position)
 	add_child(player_instance)
+	

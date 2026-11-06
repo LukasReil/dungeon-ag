@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cbixofg1hce20"]
+
+[ext_resource type="Script" uid="uid://bdsxotpfdibd4" path="res://room_scene_loader.gd" id="1_gx03f"]
+[ext_resource type="PackedScene" uid="uid://dge8e333uf3nu" path="res://level/roomElements/roomScene.tscn" id="2_6cwxd"]
+
+[node name="Node2D" type="Node2D" unique_id=809455438]
+
+[node name="RoomSceneLoader" type="Node" parent="." unique_id=1116370383]
+script = ExtResource("1_gx03f")
+ROOM_SCENE_TEMPLATE = ExtResource("2_6cwxd")

@@ -3,8 +3,35 @@
 [ext_resource type="Script" uid="uid://cgcdttecg6o1u" path="res://level/roomElements/enemy/enemy_spawner.gd" id="1_5nost"]
 [ext_resource type="Texture2D" uid="uid://cy6qumqsdgqft" path="res://level/roomElements/enemy/enemy_spawner_texture_placeholder.png" id="2_xe67r"]
 
+[sub_resource type="GDScript" id="GDScript_xe67r"]
+script/source = "extends Area2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_poog2"]
+radius = 32.01562
+
 [node name="EnemySpawner" type="Node2D" unique_id=653310591]
 script = ExtResource("1_5nost")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1168220844]
 texture = ExtResource("2_xe67r")
+
+[node name="EnemySpawnerPlayerDetector" type="Area2D" parent="." unique_id=536449437]
+collision_layer = 4
+collision_mask = 2
+script = SubResource("GDScript_xe67r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnerPlayerDetector" unique_id=1718543592]
+shape = SubResource("CircleShape2D_poog2")
+
+[connection signal="body_entered" from="EnemySpawnerPlayerDetector" to="." method="_on_enemy_spawner_player_detector_body_entered"]
