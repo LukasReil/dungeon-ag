@@ -11,12 +11,15 @@ config_version=5
 [application]
 
 config/name="DungeonAG"
-run/main_scene="uid://duo43a88ake2j"
+run/main_scene="uid://dge8e333uf3nu"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

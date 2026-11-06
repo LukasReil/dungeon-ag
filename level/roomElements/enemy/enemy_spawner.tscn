@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c260l7tlu410v"]
+
+[ext_resource type="Script" uid="uid://cgcdttecg6o1u" path="res://level/roomElements/enemy/enemy_spawner.gd" id="1_5nost"]
+[ext_resource type="Texture2D" uid="uid://cy6qumqsdgqft" path="res://level/roomElements/enemy/enemy_spawner_texture_placeholder.png" id="2_xe67r"]
+
+[node name="EnemySpawner" type="Node2D" unique_id=653310591]
+script = ExtResource("1_5nost")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1168220844]
+texture = ExtResource("2_xe67r")
