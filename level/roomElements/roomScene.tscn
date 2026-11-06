@@ -1,13 +1,20 @@
 [gd_scene format=3 uid="uid://dge8e333uf3nu"]
 
+<<<<<<<< HEAD:Szenen/roomScene.tscn
 [ext_resource type="Script" uid="uid://byp782sqanrdh" path="res://Scrips/room_loader.gd" id="1_swdke"]
+========
+[ext_resource type="Script" uid="uid://cv8f7sd8mruaa" path="res://level/roomElements/room_scene.gd" id="1_epup7"]
+[ext_resource type="Script" uid="uid://byp782sqanrdh" path="res://level/roomElements/room_loader.gd" id="2_epup7"]
+>>>>>>>> f97de85 (Made Room auto-reload if player enters enemy entry):level/roomElements/roomScene.tscn
 [ext_resource type="PackedScene" uid="uid://c260l7tlu410v" path="res://level/roomElements/enemy/enemy_spawner.tscn" id="2_mhf5n"]
 [ext_resource type="PackedScene" uid="uid://m21mtitgnbru" path="res://Szenen/Spieler.tscn" id="3_887xr"]
 [ext_resource type="Texture2D" uid="uid://cy6qumqsdgqft" path="res://level/roomElements/enemy/enemy_spawner_texture_placeholder.png" id="3_c55gg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wrlb0"]
 
-[node name="Node2D" type="Node2D" unique_id=1880088253]
+[node name="Room" type="Node2D" unique_id=1880088253 node_paths=PackedStringArray("ROOM_LOADER")]
+script = ExtResource("1_epup7")
+ROOM_LOADER = NodePath("RoomLoader")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1429585148]
 position = Vector2(669.98, 401.075)
@@ -20,7 +27,7 @@ shape = SubResource("RectangleShape2D_aske4")
 position = Vector2(1230, 150)
 
 [node name="RoomLoader" type="Node" parent="." unique_id=335096796 node_paths=PackedStringArray("ENEMY_SPAWNER_TOP_BOUND", "ENEMY_SPAWNER_BOTTOM_BOUND", "ENTRY")]
-script = ExtResource("1_swdke")
+script = ExtResource("2_epup7")
 ENEMY_SPAWNER_TEMPLATE = ExtResource("2_mhf5n")
 ENEMY_SPAWNERS = Array[int]([0, 0, 0])
 ENEMY_SPAWNER_TOP_BOUND = NodePath("../EnemySpawnerTopBound")
@@ -58,3 +65,5 @@ shape = SubResource("WorldBoundaryShape2D_wrlb0")
 position = Vector2(1280, 360)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_wrlb0")
+
+[node name="WaveManager" type="Node" parent="." unique_id=250563592]
