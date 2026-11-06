@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dc1xy2sdl3e1m"]
+
+[ext_resource type="Script" uid="uid://bpbulxgx0ha6h" path="res://Scrips/feind.gd" id="1_pytia"]
+[ext_resource type="Texture2D" uid="uid://cly5qwvrek0il" path="res://Asset/Sprite-0001.png" id="2_drgsf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aske4"]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6e5gl"]
+radius = 56.568542
+
+[node name="Feind" type="CharacterBody2D" unique_id=2020046729]
+script = ExtResource("1_pytia")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1345723993]
+shape = SubResource("CapsuleShape2D_aske4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2126603115]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("2_drgsf")
+
+[node name="Attack range" type="Area2D" parent="." unique_id=215858745]
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack range" unique_id=441184566]
+shape = SubResource("CircleShape2D_6e5gl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1574829332]
+debug_enabled = true
+
+[connection signal="area_shape_entered" from="Attack range" to="." method="_on_area_2d_area_shape_entered"]

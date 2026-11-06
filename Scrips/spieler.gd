@@ -31,11 +31,11 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if state == State.move:
-		velocity.x = direction.x * SPEED * delta
-		velocity.y = direction.y * SPEED * delta
+		velocity = direction * SPEED * delta
+		
 	elif state == State.running:
-		velocity.x = direction.x * RSPEED * delta 
-		velocity.y = direction.y * RSPEED * delta 
+		velocity = direction * RSPEED * delta 
+
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.y = move_toward(velocity.y, 0, SPEED)
