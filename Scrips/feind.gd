@@ -9,6 +9,23 @@ var Zielrichtung : Vector2
 var state = States.idle
 var bewegungrutsch: int = 500
 const SPEED : int = 9000
+var Leben : float = 100.0
+
+
+func zielsetzen(punkte: Array[Vector2]):
+	
+	var minddist : float = 1.79769e308
+	var minddist_vec : Vector2 = Vector2.ZERO
+	
+	for punkt in punkte:
+		var delta = global_position - punkt
+		var dist = delta.length()
+		if dist < minddist:
+			minddist = dist
+			minddist_vec = punkt
+	
+	ziel = minddist_vec
+	
 
 func _process(delta: float) -> void:
 	if velocity.x > 0:
@@ -51,5 +68,5 @@ func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_inde
 	
 	#Navicod
 	
-	#ziel = Vector2(area.global_position.x,area.global_position.y)
+	
 	#pass # Replace with function body.
