@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://r32w6kpyiojw"]
+
+[ext_resource type="Script" uid="uid://bxdwdhqij4hpi" path="res://Tower.gd" id="1_16bow"]
+[ext_resource type="Texture2D" uid="uid://bg0ptsnv4fta0" path="res://Asset/Sprite-0002.png" id="2_2pis0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aske4"]
+size = Vector2(52, 48)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aske4"]
+radius = 103.01942
+
+[sub_resource type="LabelSettings" id="LabelSettings_aske4"]
+font_size = 12
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6e5gl"]
+size = Vector2(53, 50)
+
+[node name="Tower" type="StaticBody2D" unique_id=1281357301]
+script = ExtResource("1_16bow")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1973493116]
+position = Vector2(4, -5)
+shape = SubResource("RectangleShape2D_aske4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=756570928]
+texture_filter = 1
+position = Vector2(6, -40)
+texture = ExtResource("2_2pis0")
+
+[node name="Kampfreichweite" type="Area2D" parent="." unique_id=947794808]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kampfreichweite" unique_id=1948845947]
+shape = SubResource("CircleShape2D_aske4")
+disabled = true
+
+[node name="Label" type="Label" parent="." unique_id=1519462798]
+offset_left = -20.0
+offset_top = -64.0
+offset_right = 20.0
+offset_bottom = -41.0
+label_settings = SubResource("LabelSettings_aske4")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=801184198]
+
+[node name="Startzeit" type="Timer" parent="." unique_id=1373901429]
+wait_time = 5.0
+one_shot = true
+
+[node name="dauer" type="Timer" parent="." unique_id=249070526]
+wait_time = 0.5
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=264051277]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1248381687]
+position = Vector2(4.5, -5)
+shape = SubResource("RectangleShape2D_6e5gl")
+
+[connection signal="timeout" from="Startzeit" to="." method="auszeit"]
+[connection signal="timeout" from="dauer" to="." method="dauer"]
+[connection signal="body_entered" from="Hitbox" to="." method="_feindaua"]
