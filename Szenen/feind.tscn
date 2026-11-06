@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpbulxgx0ha6h" path="res://Scrips/feind.gd" id="1_pytia"]
 [ext_resource type="Texture2D" uid="uid://cly5qwvrek0il" path="res://Asset/Sprite-0001.png" id="2_drgsf"]
+[ext_resource type="Script" uid="uid://c01jc876s8dah" path="res://Scrips/baseprojektil.gd" id="3_drgsf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6e5gl"]
 radius = 56.568542
@@ -24,11 +25,14 @@ position = Vector2(0, -8)
 texture = ExtResource("2_drgsf")
 
 [node name="Attack range" type="Area2D" parent="." unique_id=215858745]
-collision_layer = 0
-collision_mask = 32
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("3_drgsf")
+damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack range" unique_id=441184566]
 shape = SubResource("CircleShape2D_6e5gl")
+disabled = true
 debug_color = Color(0.99627215, 0.4165959, 0.45443374, 0.41960785)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1574829332]
@@ -49,4 +53,24 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_aske4")
 debug_color = Color(0, 0.44401067, 0.05828131, 0.41960785)
 
+[node name="Label" type="Label" parent="." unique_id=1396960690]
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 20.0
+offset_bottom = -5.0
+horizontal_alignment = 1
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=595022129]
+wait_time = 0.9
+one_shot = true
+autostart = true
+
+[node name="AttackPersistanceTimer" type="Timer" parent="." unique_id=1678097185]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="area_shape_entered" from="Attack range" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="area_shape_entered" from="Hitbox" to="." method="_on_hitbox_area_shape_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="AttackPersistanceTimer" to="." method="_on_attack_persistance_timer_timeout"]
