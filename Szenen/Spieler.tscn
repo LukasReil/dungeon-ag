@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://duo43a88ake2j"]
+
+[ext_resource type="Texture2D" uid="uid://pk6komwrrdwu" path="res://icon.svg" id="1_567me"]
+[ext_resource type="Script" uid="uid://dgv6nh01qdxkl" path="res://Scrips/spieler.gd" id="1_dyumb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aske4"]
+radius = 63.0
+height = 126.0
+
+[node name="Main" type="Node" unique_id=887310644]
+
+[node name="Spieler" type="CharacterBody2D" parent="." unique_id=717261742]
+script = ExtResource("1_dyumb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Spieler" unique_id=1631766124]
+texture = ExtResource("1_567me")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spieler" unique_id=293286512]
+shape = SubResource("CapsuleShape2D_aske4")
+
+[node name="Leben" type="Label" parent="Spieler" unique_id=1408981083]
+anchors_preset = -1
+anchor_left = -0.065000005
+anchor_top = -0.024
+offset_left = -19.0
+offset_top = -93.0
+offset_right = 19.0
+offset_bottom = -70.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1573383030]
