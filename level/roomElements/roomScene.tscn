@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://82wgl0kxonso" path="res://level/roomElements/wave_manager.gd" id="6_ngm4v"]
 [ext_resource type="PackedScene" uid="uid://dc1xy2sdl3e1m" path="res://Szenen/feind.tscn" id="7_0pw13"]
 [ext_resource type="PackedScene" uid="uid://r32w6kpyiojw" path="res://Szenen/tower.tscn" id="8_6iyi3"]
+[ext_resource type="Script" uid="uid://s6cmtbkf6lks" path="res://level/roomElements/tower_manager.gd" id="9_g4yy0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wrlb0"]
 
@@ -74,7 +75,15 @@ autostart = true
 position = Vector2(-7, 12)
 navigation_polygon = SubResource("NavigationPolygon_poog2")
 
-[node name="Tower" parent="." unique_id=1281357301 instance=ExtResource("8_6iyi3")]
+[node name="TowerManager" type="Node" parent="." unique_id=1590074897]
+script = ExtResource("9_g4yy0")
+
+[node name="Tower" parent="TowerManager" unique_id=1281357301 instance=ExtResource("8_6iyi3")]
 position = Vector2(100, 116)
 
+[node name="Tower2" parent="TowerManager" unique_id=409686981 instance=ExtResource("8_6iyi3")]
+position = Vector2(116, 605)
+
 [connection signal="timeout" from="WaveManager/WaveStartTimer" to="WaveManager" method="_on_wave_start_timer_timeout"]
+[connection signal="child_exiting_tree" from="TowerManager" to="." method="_on_tower_manager_child_exiting_tree"]
+[connection signal="child_exiting_tree" from="TowerManager" to="TowerManager" method="_on_child_exiting_tree"]

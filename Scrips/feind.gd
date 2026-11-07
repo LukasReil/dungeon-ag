@@ -3,8 +3,7 @@ extends CharacterBody2D
 
 @onready var nav2d: NavigationAgent2D = $NavigationAgent2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var health_label: Label = $Label
-
+@onready var health_label: Label = $HealthLabel
 
 enum States {idle,moving,attacking}
 var ziel : Vector2 = Vector2.INF
@@ -22,7 +21,7 @@ func zielsetzen(punkte: Array[Vector2], zerstoert : Vector2 = Vector2.INF):
 	if ziel != Vector2.INF && ziel != zerstoert:
 		return
 	
-	var minddist : float = 1.79769e308
+	var minddist : float = INF
 	var minddist_vec : Vector2 = Vector2.ZERO
 	
 	for punkt in punkte:
@@ -32,7 +31,10 @@ func zielsetzen(punkte: Array[Vector2], zerstoert : Vector2 = Vector2.INF):
 			minddist = dist
 			minddist_vec = punkt
 	
-	ziel = minddist_vec
+	if minddist != INF:
+		ziel = minddist_vec
+	else:
+		ziel = Vector2.INF
 	
 
 func _process(delta: float) -> void:

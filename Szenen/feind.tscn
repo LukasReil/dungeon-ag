@@ -37,13 +37,13 @@ position = Vector2(0, 2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_poog2")
 
-[node name="PhysicsBounds" type="CollisionShape2D" parent="." unique_id=1345723993]
+[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=1345723993]
 position = Vector2(0, 2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_aske4")
 debug_color = Color(0, 0.44401067, 0.05828131, 0.41960785)
 
-[node name="Label" type="Label" parent="." unique_id=1396960690]
+[node name="HealthLabel" type="Label" parent="." unique_id=1396960690]
 offset_left = -20.0
 offset_top = -28.0
 offset_right = 20.0

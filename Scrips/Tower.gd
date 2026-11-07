@@ -1,3 +1,4 @@
+class_name Tower
 extends StaticBody2D
 
 @onready var anzeige: Label = $HealthLabel
@@ -16,3 +17,5 @@ func _on_hitbox_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index:
 	var prj = area as Node2D as BaseProjectile
 	if prj != null:
 		Leben -= prj.damage
+		if Leben <= 0:
+			queue_free()
