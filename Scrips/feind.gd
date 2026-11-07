@@ -4,10 +4,6 @@ extends CharacterBody2D
 @onready var nav2d: NavigationAgent2D = $NavigationAgent2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var health_label: Label = $Label
-@onready var attackRangeC2D: CollisionShape2D = $"Attack range/CollisionShape2D"
-
-@onready var attack_timer: Timer = $AttackTimer
-@onready var attack_persistance_timer: Timer = $AttackPersistanceTimer
 
 
 enum States {idle,moving,attacking}
@@ -88,7 +84,7 @@ func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_inde
 
 
 func _on_hitbox_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	var proj = area as Node2D as BaseProjektil
+	var proj = area as Node2D as BaseProjectile
 	if proj == null:
 		return
 	
@@ -96,15 +92,3 @@ func _on_hitbox_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index
 	
 	if Leben <= 0:
 		queue_free()
-
-
-func _on_attack_timer_timeout() -> void:
-	attackRangeC2D.disabled = false
-	attack_persistance_timer.start()
-	
-	
-
-
-func _on_attack_persistance_timer_timeout() -> void:
-	attackRangeC2D.disabled = true
-	attack_timer.start()
