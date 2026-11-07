@@ -8,13 +8,14 @@
 [ext_resource type="Script" uid="uid://82wgl0kxonso" path="res://level/roomElements/wave_manager.gd" id="6_ngm4v"]
 [ext_resource type="PackedScene" uid="uid://dc1xy2sdl3e1m" path="res://Szenen/feind.tscn" id="7_0pw13"]
 [ext_resource type="PackedScene" uid="uid://r32w6kpyiojw" path="res://Szenen/tower.tscn" id="8_6iyi3"]
+[ext_resource type="Script" uid="uid://s6cmtbkf6lks" path="res://level/roomElements/tower_manager.gd" id="9_g4yy0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wrlb0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_poog2"]
-vertices = PackedVector2Array(661.78906, 400, 1236.0703, 36.953125, 1240.9219, 680.9922, 656.72656, 418.89844, 656.72656, 381.10156, 642.89844, 367.27344, 31.96875, 31.039063, 624, 362.21094, 605.10156, 367.27344, 30.023438, 680, 591.27344, 381.10156, 586.21094, 400, 591.27344, 418.89844, 605.10156, 432.72656, 624, 437.78906, 642.89844, 432.72656)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(1, 0, 4), PackedInt32Array(1, 4, 5), PackedInt32Array(6, 1, 5, 7), PackedInt32Array(6, 7, 8), PackedInt32Array(9, 6, 8, 10), PackedInt32Array(9, 10, 11), PackedInt32Array(9, 11, 12), PackedInt32Array(9, 12, 13), PackedInt32Array(2, 9, 13, 14), PackedInt32Array(2, 14, 15), PackedInt32Array(2, 15, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1246, 27, 22, 21, 20, 690, 1251, 691)])
+vertices = PackedVector2Array(1277, 698, 17, 698, 17, -2, 1277, -2)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1287, -12, 7, -12, 7, 708, 1287, 708)])
 
 [node name="Room" type="Node2D" unique_id=1880088253]
 script = ExtResource("1_epup7")
@@ -67,7 +68,6 @@ script = ExtResource("6_ngm4v")
 POSSIBLE_ENEMIES = Array[PackedScene]([ExtResource("7_0pw13")])
 
 [node name="WaveStartTimer" type="Timer" parent="WaveManager" unique_id=395009508]
-wait_time = 0.004
 one_shot = true
 autostart = true
 
@@ -75,13 +75,15 @@ autostart = true
 position = Vector2(-7, 12)
 navigation_polygon = SubResource("NavigationPolygon_poog2")
 
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D" unique_id=1584617443]
-position = Vector2(624, 400)
-radius = 37.79
-affect_navigation_mesh = true
-carve_navigation_mesh = true
+[node name="TowerManager" type="Node" parent="." unique_id=1590074897]
+script = ExtResource("9_g4yy0")
 
-[node name="Tower" parent="." unique_id=1281357301 instance=ExtResource("8_6iyi3")]
+[node name="Tower" parent="TowerManager" unique_id=1281357301 instance=ExtResource("8_6iyi3")]
 position = Vector2(100, 116)
 
+[node name="Tower2" parent="TowerManager" unique_id=409686981 instance=ExtResource("8_6iyi3")]
+position = Vector2(116, 605)
+
 [connection signal="timeout" from="WaveManager/WaveStartTimer" to="WaveManager" method="_on_wave_start_timer_timeout"]
+[connection signal="child_exiting_tree" from="TowerManager" to="." method="_on_tower_manager_child_exiting_tree"]
+[connection signal="child_exiting_tree" from="TowerManager" to="TowerManager" method="_on_child_exiting_tree"]

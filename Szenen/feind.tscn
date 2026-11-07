@@ -2,10 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bpbulxgx0ha6h" path="res://Scrips/feind.gd" id="1_pytia"]
 [ext_resource type="Texture2D" uid="uid://cly5qwvrek0il" path="res://Asset/Sprite-0001.png" id="2_drgsf"]
-[ext_resource type="Script" uid="uid://c01jc876s8dah" path="res://Scrips/baseprojektil.gd" id="3_drgsf"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6e5gl"]
-radius = 56.568542
+[ext_resource type="Script" uid="uid://0p8va7cx0p2v" path="res://level/roomElements/projectiles/melee_attack_system.gd" id="3_7nosr"]
+[ext_resource type="Script" uid="uid://c01jc876s8dah" path="res://level/roomElements/projectiles/base_projectile.gd" id="3_drgsf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_poog2"]
 height = 36.0
@@ -13,6 +11,9 @@ height = 36.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aske4"]
 radius = 7.0
 height = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1mxgh"]
+radius = 37.12142
 
 [node name="Feind" type="CharacterBody2D" unique_id=2020046729]
 collision_layer = 8
@@ -23,17 +24,6 @@ script = ExtResource("1_pytia")
 texture_filter = 1
 position = Vector2(0, -8)
 texture = ExtResource("2_drgsf")
-
-[node name="Attack range" type="Area2D" parent="." unique_id=215858745]
-collision_layer = 64
-collision_mask = 0
-script = ExtResource("3_drgsf")
-damage = 10.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack range" unique_id=441184566]
-shape = SubResource("CircleShape2D_6e5gl")
-disabled = true
-debug_color = Color(0.99627215, 0.4165959, 0.45443374, 0.41960785)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1574829332]
 debug_enabled = true
@@ -47,30 +37,40 @@ position = Vector2(0, 2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_poog2")
 
-[node name="PhysicsBounds" type="CollisionShape2D" parent="." unique_id=1345723993]
+[node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=1345723993]
 position = Vector2(0, 2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_aske4")
 debug_color = Color(0, 0.44401067, 0.05828131, 0.41960785)
 
-[node name="Label" type="Label" parent="." unique_id=1396960690]
+[node name="HealthLabel" type="Label" parent="." unique_id=1396960690]
 offset_left = -20.0
 offset_top = -28.0
 offset_right = 20.0
 offset_bottom = -5.0
 horizontal_alignment = 1
 
-[node name="AttackTimer" type="Timer" parent="." unique_id=595022129]
-wait_time = 0.9
-one_shot = true
+[node name="MeleeAttackSystem" type="Node2D" parent="." unique_id=404807631]
+script = ExtResource("3_7nosr")
+
+[node name="AttackRange" type="Area2D" parent="MeleeAttackSystem" unique_id=754171351]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("3_drgsf")
+damage = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackSystem/AttackRange" unique_id=2022616499]
+shape = SubResource("CircleShape2D_1mxgh")
+disabled = true
+
+[node name="AttackTime" type="Timer" parent="MeleeAttackSystem" unique_id=332714041]
 autostart = true
 
-[node name="AttackPersistanceTimer" type="Timer" parent="." unique_id=1678097185]
+[node name="DisableTimer" type="Timer" parent="MeleeAttackSystem" unique_id=1345511807]
 wait_time = 0.1
 one_shot = true
 
-[connection signal="area_shape_entered" from="Attack range" to="." method="_on_area_2d_area_shape_entered"]
 [connection signal="area_shape_entered" from="Hitbox" to="." method="_on_hitbox_area_shape_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="AttackPersistanceTimer" to="." method="_on_attack_persistance_timer_timeout"]
+[connection signal="timeout" from="MeleeAttackSystem/AttackTime" to="MeleeAttackSystem" method="_on_attack_time_timeout"]
+[connection signal="timeout" from="MeleeAttackSystem/DisableTimer" to="MeleeAttackSystem" method="_on_disable_timer_timeout"]
